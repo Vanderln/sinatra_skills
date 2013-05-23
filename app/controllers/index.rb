@@ -1,8 +1,11 @@
 get '/' do
   # render home page
-  @users = User.all
-
-  erb :index
+  users = User.all
+  # This would be better, because it looks up all the information that the index
+  # will eventually need when it's rendering the skills table.
+  # users = User.all.includes(:proficiencies => [:skill])
+  
+  erb :index, :locals => {:users => users}
 end
 
 #----------- SESSIONS -----------
